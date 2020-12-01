@@ -20,7 +20,7 @@ if [ -d "$path" ]; then
 else
     echo "$path does not exist."
     mkdir $path
-    mkdir $path{images,tableau,spreadsheets,docs}
+    mkdir -p ${path}{images,tableau,spreadsheets,docs,scripts,etc/dmg}
 fi
 
 # iterate through downloads folder
@@ -42,16 +42,18 @@ for f in *; do
         echo "${path}${base}_${now_full}.${ext}"
 
         if [ .$ext = '.jpg' ] || [ .$ext = '.png' ] || [ .$ext = '.tiff' ] || [ .$ext = '.gif' ]; then
-          mv "./$f" "${path}/images/${base}_${now_full}.${ext}"
+          mv "./$f" "${path}images/${base}_${now_full}.${ext}"
         elif [ .$ext = '.twbx' ] || [ .$ext = '.twb' ]; then
-          mv "./$f" "${path}/tableau/${base}_${now_full}.${ext}"
+          mv "./$f" "${path}tableau/${base}_${now_full}.${ext}"
         elif [ .$ext = '.xls' ] || [ .$ext = '.xlsx' ] || [ .$ext = '.csv' ]; then
-          mv "./$f" "${path}/spreadsheets/${base}_${now_full}.${ext}"
+          mv "./$f" "${path}spreadsheets/${base}_${now_full}.${ext}"
         elif [ .$ext = '.sql' ] || [ .$ext = '.sh' ] || [ .$ext = '.py' ]; then
-          mv "./$f" "${path}/scripts/${base}_${now_full}.${ext}"
+          mv "./$f" "${path}scripts/${base}_${now_full}.${ext}"
         elif [ .$ext = '.doc' ] || [ .$ext = '.docx' ] || [ .$ext = '.pages' ] || [ .$ext = '.txt' ] || [ .$ext = '.pdf' ] || [ .$ext = '.rtf' ]; then
-          mv "./$f" "${path}/docs/${base}_${now_full}.${ext}"
-        else mv "./$f" "${path}${base}_${now_full}.${ext}"
+          mv "./$f" "${path}docs/${base}_${now_full}.${ext}"
+        elif [ .$ext = '.dmg' ]; then
+          mv "./$f" "${path}etc/dmg/${base}_${now_full}.${ext}"
+        else mv "./$f" "${path}etc/${base}_${now_full}.${ext}"
         fi
 
     fi
