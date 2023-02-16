@@ -1,6 +1,4 @@
-#!/bin/bash
-
-user='noah.libby'
+user='noahlibby'
 
 # get current datetime
 now=$(date)
@@ -39,15 +37,16 @@ for f in *; do
     else     # if file, mv to proper downloads folder and rename
         base=${f%%.*}
         ext=${f#*.}
+        ext=$(echo $ext | tr '[:upper:]' '[:lower:]')
         echo "${path}${base}_${now_full}.${ext}"
 
-        if [ .$ext = '.jpg' ] || [ .$ext = '.png' ] || [ .$ext = '.tiff' ] || [ .$ext = '.gif' ]; then
+        if [ .$ext = '.jpg' ] || [ .$ext = '.png' ] || [ .$ext = '.tiff' ] || [ .$ext = '.gif' ] || [ .$ext = '.heic' ]; then
           mv "./$f" "${path}images/${base}_${now_full}.${ext}"
-        elif [ .$ext = '.twbx' ] || [ .$ext = '.twb' ]; then
-          mv "./$f" "${path}tableau/${base}_${now_full}.${ext}"
+        #elif [ .$ext = '.twbx' ] || [ .$ext = '.twb' ]; then
+        #  mv "./$f" "${path}tableau/${base}_${now_full}.${ext}"
         elif [ .$ext = '.xls' ] || [ .$ext = '.xlsx' ] || [ .$ext = '.csv' ]; then
           mv "./$f" "${path}spreadsheets/${base}_${now_full}.${ext}"
-        elif [ .$ext = '.sql' ] || [ .$ext = '.sh' ] || [ .$ext = '.py' ]; then
+        elif [ .$ext = '.sql' ] || [ .$ext = '.sh' ] || [ .$ext = '.py' ] || [ .$ext = '.zsh' ]; then
           mv "./$f" "${path}scripts/${base}_${now_full}.${ext}"
         elif [ .$ext = '.doc' ] || [ .$ext = '.docx' ] || [ .$ext = '.pages' ] || [ .$ext = '.txt' ] || [ .$ext = '.pdf' ] || [ .$ext = '.rtf' ]; then
           mv "./$f" "${path}docs/${base}_${now_full}.${ext}"
